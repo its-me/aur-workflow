@@ -5,6 +5,9 @@ on:
     - cron: '30 0 * * *'
   workflow_dispatch:
 
+env:
+  PKG_PATH: git
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -20,7 +23,7 @@ jobs:
         id: update
         uses: its-me/action.aur.update@v0
         with:
-          path: git
+          path: ${{ env.PKG_PATH }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   ci:
@@ -36,7 +39,7 @@ jobs:
       - name: CI
         uses: its-me/action.aur.ci@v0
         with:
-          path: git
+          path: ${{ env.PKG_PATH }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
@@ -58,6 +61,6 @@ jobs:
       - name: Publish
         uses: its-me/action.aur.publish@v0
         with:
-          path: git
+          path: ${{ env.PKG_PATH }}
           ssh-key: ${{ secrets.AUR_SSH_KEY }}
           package-name: package-git
