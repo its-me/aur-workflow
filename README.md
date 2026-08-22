@@ -10,8 +10,8 @@ package repos: `.github/workflows/*.yaml`, `.github/dependabot.yaml`,
 
 1. Create a new repo from this template, named `aur.<pkgname>`.
 2. Base its `ci.yaml`/`publish.yaml` on `ci-release.yaml`/
-   `publish-release.yaml` (drop the "Stage package" step and path filters —
-   those only exist here because this repo hosts two packages in
+   `publish-release.yaml` (drop the `path` input and path filters — those
+   only exist here because this repo hosts two packages in
    subdirectories). Replace `package` in `publish.yaml`'s
    `environment.url` and `package-name` input with the actual AUR package
    name.

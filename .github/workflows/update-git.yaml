@@ -37,11 +37,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Stage package
-        run: cp git/PKGBUILD git/.SRCINFO .
-
       - name: Publish
         uses: its-me/action.aur.publish@v0
         with:
+          path: git
           ssh-key: ${{ secrets.AUR_SSH_KEY }}
           package-name: package-git

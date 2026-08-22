@@ -19,10 +19,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Stage package
-        run: cp release/PKGBUILD release/.SRCINFO .
-
       - name: CI
         uses: its-me/action.aur.ci@v0
         with:
+          path: release
           github-token: ${{ secrets.GITHUB_TOKEN }}
