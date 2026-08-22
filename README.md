@@ -31,10 +31,8 @@ package repos: `.github/workflows/*.yaml`, `.github/dependabot.yaml`,
 - `update-release.yaml` / `update-git.yaml` — daily (00:30 UTC) and
   manually dispatched; run `its-me/action.aur.update` to check
   `dummy.releases` for a new release/commit, bump the PKGBUILD, and — if
-  it changed — automatically publish the update to the AUR.
-  `update-git.yaml` additionally runs an `its-me/action.aur.ci` job
-  between the update and publish jobs, so a bad bump is caught before
-  it's published.
+  it changed — run `its-me/action.aur.ci` to validate the bump, then
+  automatically publish the update to the AUR.
 - `zizmor.yaml` — security scanning for the workflows themselves.
 - `dependabot.yaml` — keeps `github-actions` pins up to date, with a 7-day
   cooldown and minor/patch bumps ignored (actions are pinned to bare major
