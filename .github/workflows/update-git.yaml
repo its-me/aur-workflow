@@ -23,8 +23,24 @@ jobs:
           path: git
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  publish:
+  ci:
     needs: update
+    if: needs.update.outputs.updated == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: CI
+        uses: its-me/action.aur.ci@v0
+        with:
+          path: git
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: [update, ci]
     if: needs.update.outputs.updated == 'true'
     runs-on: ubuntu-slim
     environment:
@@ -36,6 +52,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Publish
         uses: its-me/action.aur.publish@v0
