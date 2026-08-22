@@ -1,0 +1,47 @@
+name: Update git package
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      updated: ${{ steps.update.outputs.updated }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Update
+        id: update
+        uses: its-me/action.aur.update@v0
+        with:
+          path: git
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: update
+    if: needs.update.outputs.updated == 'true'
+    runs-on: ubuntu-slim
+    environment:
+      name: AUR
+      url: https://aur.archlinux.org/packages/package-git
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Stage package
+        run: cp git/PKGBUILD git/.SRCINFO .
+
+      - name: Publish
+        uses: its-me/action.aur.publish@v0
+        with:
+          ssh-key: ${{ secrets.AUR_SSH_KEY }}
+          package-name: package-git
