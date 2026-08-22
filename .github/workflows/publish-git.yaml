@@ -1,4 +1,4 @@
-name: Publish to AUR
+name: Publish git package to AUR
 
 on:
   workflow_dispatch:
@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-slim
     environment:
       name: AUR
-      # Replace CHANGEME with the AUR package name before using this template.
-      url: https://aur.archlinux.org/packages/CHANGEME
+      url: https://aur.archlinux.org/packages/package-git
     permissions:
       contents: read
 
@@ -21,8 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Stage package
+        run: cp git/PKGBUILD git/.SRCINFO .
+
       - name: Publish
         uses: its-me/action.aur.publish@v0
         with:
           ssh-key: ${{ secrets.AUR_SSH_KEY }}
+          package-name: package-git
           commit-message: ${{ github.event.inputs.commit_message }}

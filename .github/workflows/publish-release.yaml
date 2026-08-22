@@ -1,0 +1,31 @@
+name: Publish release package to AUR
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: "Commit message (optional)"
+        required: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-slim
+    environment:
+      name: AUR
+      url: https://aur.archlinux.org/packages/package
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Stage package
+        run: cp release/PKGBUILD release/.SRCINFO .
+
+      - name: Publish
+        uses: its-me/action.aur.publish@v0
+        with:
+          ssh-key: ${{ secrets.AUR_SSH_KEY }}
+          package-name: package
+          commit-message: ${{ github.event.inputs.commit_message }}
