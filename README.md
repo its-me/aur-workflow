@@ -4,7 +4,11 @@ Template repository holding the CI/CD workflows shared by all `aur.*` AUR
 package repos: `.github/workflows/*.yaml`, `.github/dependabot.yaml`,
 `.gitignore`, and `LICENSE`. It also hosts two live example packages —
 `release/` and `git/` — that exercise the pipeline end to end, built from
-[`its-me/dummy.releases`](https://github.com/its-me/dummy.releases).
+[`its-me/dummy.releases`](https://github.com/its-me/dummy.releases) and
+published to
+[`its-me/dummy.aur.package`](https://github.com/its-me/dummy.aur.package) /
+[`its-me/dummy.aur.package-git`](https://github.com/its-me/dummy.aur.package-git)
+instead of the real AUR.
 
 ## Using this template
 
@@ -26,13 +30,14 @@ package repos: `.github/workflows/*.yaml`, `.github/dependabot.yaml`,
 - `ci-release.yaml` / `ci-git.yaml` — run `its-me/action.aur.ci` on
   push/PR, scoped to `release/**` or `git/**` respectively.
 - `publish-release.yaml` / `publish-git.yaml` — manually dispatched; run
-  `its-me/action.aur.publish` to push `release/` or `git/` to the AUR as
-  `package` / `package-git`.
+  `its-me/action.aur.publish` to push `release/` or `git/` as `package` /
+  `package-git` to `dummy.aur.package` / `dummy.aur.package-git` (via
+  `destination`, using dedicated deploy-key secrets — not the real AUR).
 - `update-release.yaml` / `update-git.yaml` — daily (00:30 UTC) and
   manually dispatched; run `its-me/action.aur.update` to check
   `dummy.releases` for a new release/commit, bump the PKGBUILD, and — if
   it changed — run `its-me/action.aur.ci` to validate the bump, then
-  automatically publish the update to the AUR.
+  publish the update the same way.
 - `zizmor.yaml` — security scanning for the workflows themselves.
 - `dependabot.yaml` — keeps `github-actions` pins up to date, with a 7-day
   cooldown and minor/patch bumps ignored (actions are pinned to bare major

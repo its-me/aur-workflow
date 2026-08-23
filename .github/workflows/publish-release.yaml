@@ -11,8 +11,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     environment:
-      name: AUR
-      url: https://aur.archlinux.org/packages/package
+      name: dummy-package
+      url: https://github.com/its-me/dummy.aur.package
     permissions:
       contents: read
 
@@ -24,7 +24,8 @@ jobs:
         uses: its-me/action.aur.publish@v0
         with:
           path: release
-          ssh-key: ${{ secrets.AUR_SSH_KEY }}
+          ssh-key: ${{ secrets.DUMMY_PACKAGE_SSH_KEY }}
+          destination: ssh://git@github.com/its-me/dummy.aur.package.git
           package-name: package
           git-user-name: Sergey Kanafyev
           git-user-email: sergeykanafyev@gmail.com

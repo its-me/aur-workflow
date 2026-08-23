@@ -49,8 +49,8 @@ jobs:
     if: needs.update.outputs.updated == 'true'
     runs-on: ubuntu-latest
     environment:
-      name: AUR
-      url: https://aur.archlinux.org/packages/package-git
+      name: dummy-package-git
+      url: https://github.com/its-me/dummy.aur.package-git
     permissions:
       contents: read
 
@@ -64,7 +64,8 @@ jobs:
         uses: its-me/action.aur.publish@v0
         with:
           path: ${{ env.PKG_PATH }}
-          ssh-key: ${{ secrets.AUR_SSH_KEY }}
+          ssh-key: ${{ secrets.DUMMY_PACKAGE_GIT_SSH_KEY }}
+          destination: ssh://git@github.com/its-me/dummy.aur.package-git.git
           package-name: package-git
           git-user-name: Sergey Kanafyev
           git-user-email: sergeykanafyev@gmail.com
