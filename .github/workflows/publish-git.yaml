@@ -26,4 +26,6 @@ jobs:
           path: git
           ssh-key: ${{ secrets.AUR_SSH_KEY }}
           package-name: package-git
+          git-user-name: Sergey Kanafyev
+          git-user-email: sergeykanafyev@gmail.com
           commit-message: ${{ github.event.inputs.commit_message }}

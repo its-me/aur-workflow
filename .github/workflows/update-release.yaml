@@ -25,6 +25,8 @@ jobs:
         with:
           path: ${{ env.PKG_PATH }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          git-user-name: Sergey Kanafyev
+          git-user-email: sergeykanafyev@gmail.com
 
   ci:
     needs: update
@@ -64,3 +66,5 @@ jobs:
           path: ${{ env.PKG_PATH }}
           ssh-key: ${{ secrets.AUR_SSH_KEY }}
           package-name: package
+          git-user-name: Sergey Kanafyev
+          git-user-email: sergeykanafyev@gmail.com
