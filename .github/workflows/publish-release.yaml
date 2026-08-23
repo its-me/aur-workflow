@@ -25,6 +25,7 @@ jobs:
         with:
           path: release
           ssh-key: ${{ secrets.DUMMY_PACKAGE_SSH_KEY }}
+          strict-host-checking: false
           destination: ssh://git@github.com/its-me/dummy.aur.package.git
           package-name: package
           git-user-name: Sergey Kanafyev

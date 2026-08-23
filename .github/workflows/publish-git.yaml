@@ -25,6 +25,7 @@ jobs:
         with:
           path: git
           ssh-key: ${{ secrets.DUMMY_PACKAGE_GIT_SSH_KEY }}
+          strict-host-checking: false
           destination: ssh://git@github.com/its-me/dummy.aur.package-git.git
           package-name: package-git
           git-user-name: Sergey Kanafyev
