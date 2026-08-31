@@ -9,6 +9,7 @@ on:
     paths:
       - 'release/**'
       - '.github/workflows/ci-release.yaml'
+  workflow_dispatch:
 
 jobs:
   ci:
