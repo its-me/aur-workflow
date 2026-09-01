@@ -9,7 +9,6 @@ on:
     paths:
       - 'git/**'
       - '.github/workflows/ci-git.yaml'
-  workflow_dispatch:
 
 jobs:
   ci:
