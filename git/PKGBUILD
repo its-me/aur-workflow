@@ -3,7 +3,7 @@
 
 pkgname=package-git
 _pkgname=dummy.releases
-pkgver=v0.2.4.r1.gd5cb93c
+pkgver=v0.3.1.r1.g4dfc841
 pkgrel=1
 pkgdesc="Dummy package used to exercise the aur-workflow CI/publish pipeline (tracks git commits)"
 arch=('any')
