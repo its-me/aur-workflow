@@ -3,14 +3,14 @@
 
 pkgname=package
 _pkgname=dummy.releases
-pkgver=0.4.2
+pkgver=0.4.3
 pkgrel=1
 pkgdesc="Dummy package used to exercise the aur-workflow CI/publish pipeline (tracks tagged releases)"
 arch=('any')
 url="https://github.com/its-me/dummy.releases"
 license=('MIT')
 source=("${_pkgname}-${pkgver}.tar.gz::https://github.com/its-me/dummy.releases/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('be5589cb20fb11ae12c064e4d586645233b8d410fa01d4a9de6ba2ab36ff6e9a')
+sha256sums=('2d38aeb16f13b83304bbcb4b02a47057a228cfe6222ae0a4d489bdca87505c34')
 
 package() {
     cd "${_pkgname}-${pkgver}"
